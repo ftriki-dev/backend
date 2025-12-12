@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from vertexai.generative_models import GenerativeModel
+import vertexai
 
 app = FastAPI()
 
@@ -12,3 +14,17 @@ class AddRequest(BaseModel):
 def add_numbers(req: AddRequest):
     # Replace this with your real factor / backtest logic
     return {"result": req.x + req.y}
+
+
+
+vertexai.init(project="YOUR_PROJECT_ID", location="us-central1")
+
+class LLMRequest(BaseModel):
+    prompt: str
+
+@app.post("/ask_llm")
+def ask_llm(req: LLMRequest):
+    model = GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(req.prompt)
+    return {"output": response.text}
+
