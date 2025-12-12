@@ -17,7 +17,8 @@ def add_numbers(req: AddRequest):
 
 
 
-vertexai.init(project="YOUR_PROJECT_ID", location="us-central1")
+vertexai.init(project="ancient-torch-480602-a1", location="us-central1")
+
 
 class LLMRequest(BaseModel):
     prompt: str
