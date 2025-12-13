@@ -25,7 +25,7 @@ class LLMRequest(BaseModel):
 
 @app.post("/ask_llm")
 def ask_llm(req: LLMRequest):
-    model = GenerativeModel("gemini-1.5-flash")
+    model = GenerativeModel("gemini-2.5-flash")
     response = model.generate_content(req.prompt)
     return {"output": response.text}
 
